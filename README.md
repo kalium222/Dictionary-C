@@ -1,2 +1,2 @@
 # Dictionary-C
-An implementation of dictionary based on double linked list in c
+An implementation of sorted dictionary based on double linked list in c. increasing order of keys.
