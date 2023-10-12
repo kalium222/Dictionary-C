@@ -1,72 +1,49 @@
-#ifndef _DICTIONARY_H_
-#define _DICTIONARY_H_
+#ifndef DICTIONARY_DICTIONARY_H
+#define DICTIONARY_DICTIONARY_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct Node {
+struct node {
     int key;
     int value;
-    struct Node *next;
-    struct Node *prev;
-} Node;
+    struct node *pred;
+    struct node *succ;
+};
 
-typedef struct Dictionary {
-    struct Node* head;
-} Dictionary;
+struct dictionary {
+    struct node *head;
+    struct node *tail;
+};
 
-/**
- * @brief search a key in the dictionary.
- * O(log n)
- * @param dict pointer to the dictionary
- * @param key the key to search
- * @return Node* 
- */
-Node* search(const Dictionary* dict, const int key);
-/**
- * @brief insert a key-value pair into the dictionary.
- * O(n)
- * @param dict pointer to the dictionary
- * @param key
- * @param value 
- */
-void insert(Dictionary* dict, const int key, const int value);
-/**
- * @brief delete a key-value pair from the dictionary.
- * O(n)
- * @param dict the pointer to the dictionary
- * @param key the key to delete
- */
-void delete(Dictionary* dict, const int key);
-/**
- * @brief get the predecessor of a key
- * O(1)
- * @param dict the pointer to the dictionary
- * @param key 
- * @return Node* 
- */
-Node* predecessor(const Dictionary* dict, const int key);
-/**
- * @brief get the successor of a key
- * O(1)
- * @param dict 
- * @param key 
- * @return Node* 
- */
-Node* successor(const Dictionary* dict, const int key);
-/**
- * @brief get the maximum key in the dictionary
- * O(1)
- * @param dict 
- * @return Node* 
- */
-Node* minimum(const Dictionary* dict);
-/**
- * @brief get the minimum key in the dictionary
- * O(1)
- * @param dict 
- * @return Node* 
- */
-Node* maximum(const Dictionary* dict);
+struct dictionary *initializer();
+// EFFECT: Initialize an empty dictionary
 
-#endif // _DICTIONARY_H_
+struct node *search(struct dictionary *dict, int key);
+// EFFECT: Given a dictionary, return the pointer to the element(key-value pair) specified by the key, return NULL if not found.
+
+void insert(struct dictionary *dict, int key, int value);
+// EFFECT: If the key does not exist, insert an element(a key-value pair) to this dictionary. If key already exists, update the value.
+
+void delete(struct dictionary *dict,int key);
+// EFFECT: Delete an element(key-value pair) specified by the key. If it does not exist, do nothing
+
+struct node *minimum(struct dictionary* dict);
+// EFFECT: return the element(key-value pair) with the smallest key
+
+struct node *maximum(struct dictionary* dict);
+// EFFECT: return the element(key-value pair) with the largest key
+
+struct node *predecessor(struct dictionary* dict, int key);
+// EFFECT: retrieve the pointer to the element(key-value pair) just before a given key
+
+struct node *successor(struct dictionary* dict, int key);
+// EFFECT: retrieve the pointer to the element(key-value pair) just after a given key
+
+void free_dict(struct dictionary* dict);
+// EFFECT: free the memory allocated for this dictionary
+
+int getkey(struct node* element);
+// EFFECT: Given a pointer to the element, return the key
+
+int getvalue(struct node* element);
+// EFFECT: Given a pointer to the element, return the value
+
+#endif //DICTIONARY_DICTIONARY_H
